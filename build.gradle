@@ -18,5 +18,8 @@ test.environment([
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
