@@ -43,7 +43,7 @@ jobs:
       before_deploy:
         - echo "Deploying $RELEASE_TAG to Cloud Foundry"
       before_script:
-        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $CF_SPACE
+        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s "Luke Dowell"
         - scripts/migrate-databases.sh pal-tracker .
       deploy:
         provider: cloudfoundry
@@ -51,4 +51,4 @@ jobs:
         username: $CF_USERNAME
         password: $CF_PASSWORD
         organization: $CF_ORG
-        space: $CF_SPACE
+        space: "Luke Dowell"
