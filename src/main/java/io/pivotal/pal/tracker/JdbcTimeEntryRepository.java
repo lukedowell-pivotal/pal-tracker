@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -47,7 +48,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
             final PreparedStatement ps = connection.prepareStatement(CREATE_SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, timeEntry.getProjectId());
             ps.setLong(2, timeEntry.getUserId());
-            ps.setObject(3, timeEntry.getDate());
+            ps.setDate(3, Date.valueOf(timeEntry.getDate()));
             ps.setInt(4, timeEntry.getHours());
 
             return ps;
@@ -55,9 +56,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
 
         final long id = Objects.requireNonNull(keyHolder.getKey()).longValue();
 
-        return timeEntry.toBuilder()
-                .id(id)
-                .build();
+        return find(id);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
             final PreparedStatement ps = connection.prepareStatement(UPDATE_SQL);
             ps.setLong(1, timeEntry.getProjectId());
             ps.setLong(2, timeEntry.getUserId());
-            ps.setObject(3, timeEntry.getDate());
+            ps.setDate(3, Date.valueOf(timeEntry.getDate()));
             ps.setInt(4, timeEntry.getHours());
             ps.setLong(5, id);
 

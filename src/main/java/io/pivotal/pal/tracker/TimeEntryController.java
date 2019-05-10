@@ -12,7 +12,7 @@ public class TimeEntryController {
 
     private final TimeEntryRepository repository;
 
-    public TimeEntryController(@Qualifier("memoryDb") TimeEntryRepository repository) {
+    public TimeEntryController(@Qualifier("jdbcDb") TimeEntryRepository repository) {
         this.repository = repository;
     }
 
